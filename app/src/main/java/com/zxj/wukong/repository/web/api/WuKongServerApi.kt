@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface WuKongServerApi {
-    @GET("/caseinfo")
+    @GET("queryCasesInfo")
     fun getCasesInfo():Call<CasesInfoResponse>
 }

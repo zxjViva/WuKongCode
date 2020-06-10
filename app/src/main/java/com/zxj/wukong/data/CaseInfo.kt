@@ -1,3 +1,12 @@
 package com.zxj.wukong.data
 
-data class CaseInfo(val name:String,val snapshotUrl:String,val author:String,val desc :String)
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class CaseInfo(
+    @Json(name = "name") val name: String,
+    @Json(name = "snapshotUrl") val snapshotUrl: String,
+    @Json(name = "author") val author: String,
+    @Json(name = "desc") val desc: String
+)

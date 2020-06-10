@@ -4,34 +4,40 @@
 
     <data>
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener"/>
-        <variable
             name="caseInfo"
             type="com.zxj.wukong.data.CaseInfo"/>
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:onClick="@{clickListener}"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ImageView
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 app:imageFromUrl="@{caseInfo.snapshotUrl}" />
 
             <TextView
+                app:layout_constraintTop_toBottomOf="@id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="@{caseInfo.name,default=sss}" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:src="@mipmap/icon_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
+                android:id="@+id/add_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>
