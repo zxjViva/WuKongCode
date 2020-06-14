@@ -11,11 +11,14 @@ import com.zxj.base.net.NetResult
 import com.zxj.wukong.adapter.CasesAdapter
 import com.zxj.wukong.data.CaseInfo
 import com.zxj.wukong.databinding.FragmentHomeBinding
+import com.zxj.wukong.databinding.HomeHeaderLayoutBinding
 import com.zxj.wukong.viewmodels.CasesInfoViewModel
+import kotlin.concurrent.thread
 
-class HomeFragment:Fragment() {
-    lateinit var adapter:CasesAdapter
-    lateinit var bindView:FragmentHomeBinding
+class HomeFragment : Fragment() {
+    lateinit var adapter: CasesAdapter
+    lateinit var bindView: FragmentHomeBinding
+    lateinit var headerBinding: HomeHeaderLayoutBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,15 +30,25 @@ class HomeFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindView = FragmentHomeBinding.bind(view)
+        headerBinding = bindView.headerLayout
         val model: CasesInfoViewModel by viewModels()
         model.casesInfo.observe(viewLifecycleOwner,
             Observer<NetResult<List<CaseInfo>>> {
-                if (it.result != null){
+                if (it.result != null) {
                     adapter = CasesAdapter(it.result)
                     bindView.rv.adapter = adapter
                 }
 
             })
+        thread {
+            while (true) {
+                Thread.sleep(2000)
+                headerBinding.userTv.post {
+                    headerBinding.userTv.text = "sadasd"
+                }
+            }
+        }
+
     }
 
 }
