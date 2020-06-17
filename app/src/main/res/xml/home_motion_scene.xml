@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="1000"
+        app:motionInterpolator="linear" />
+    <OnSwipe>
+
+    </OnSwipe>
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/search_view"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:src="@mipmap/icon_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/header_iv"
+            android:src="@mipmap/icon_head"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_view"
+            android:layout_width="56dp"
+            android:layout_height="56dp"/>
+        <Constraint
+            android:maxLines="1"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_iv"
+            android:id="@+id/user_tv"
+            style="@style/TextNormalStyle" />
+
+        <Constraint
+            android:id="@+id/desc_tv"
+            android:alpha="1"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_tv"
+            style="@style/TextNormalStyle" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/search_view"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:src="@mipmap/icon_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/header_iv"
+            android:src="@mipmap/icon_head"
+            android:layout_marginStart="@dimen/margin_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+        <Constraint
+            android:maxLines="1"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/header_iv"
+            android:id="@+id/user_tv"
+            style="@style/TextNormalStyle" />
+
+        <Constraint
+            android:id="@+id/desc_tv"
+            android:alpha="0"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_tv"
+            style="@style/TextNormalStyle" />
+    </ConstraintSet>
+</MotionScene>
