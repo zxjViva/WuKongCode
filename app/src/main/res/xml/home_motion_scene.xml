@@ -7,9 +7,7 @@
         app:constraintSetStart="@+id/start"
         app:duration="1000"
         app:motionInterpolator="linear" />
-    <OnSwipe>
 
-    </OnSwipe>
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/search_view"

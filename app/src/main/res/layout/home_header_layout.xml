@@ -27,6 +27,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"/>
     <TextView
+        android:text="zxj"
         android:maxLines="1"
         tools:text= "user"
         android:layout_marginTop="16dp"
