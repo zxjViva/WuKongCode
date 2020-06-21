@@ -17,7 +17,19 @@
             app:popExitAnim="@anim/slide_out_right"
             android:id="@+id/action_homeFragment_to_caseDescFragment"
             app:destination="@id/caseDescFragment" />
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            android:id="@+id/action_homeFragment_to_shoppingCartFragment"
+            app:destination="@id/shopingCartFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_shoppingcart"
+        android:id="@+id/shopingCartFragment"
+        android:name="com.zxj.wukong.ui.fragments.ShoppingCarFragment"
+        android:label="shopingCartFragment" />
     <fragment
         tools:layout="@layout/fragment_desc"
         android:id="@+id/caseDescFragment"

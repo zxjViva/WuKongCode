@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.github.florent37.viewanimator.ViewAnimator
 import com.zxj.base.net.NetResult
 import com.zxj.wukong.R
@@ -16,7 +17,10 @@ import com.zxj.wukong.adapter.CasesAdapter
 import com.zxj.wukong.data.CaseInfo
 import com.zxj.wukong.databinding.FragmentHomeBinding
 import com.zxj.wukong.databinding.HomeHeaderLayoutBinding
+import com.zxj.wukong.repository.local.DbManager
 import com.zxj.wukong.viewmodels.CasesInfoViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private lateinit var adapter: CasesAdapter
@@ -41,6 +45,9 @@ class HomeFragment : Fragment() {
                     initAdapter(it.result!!)
                 }
             })
+        bindView.shopcarIv.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_shoppingCartFragment)
+        }
     }
 
     private fun initAdapter(result: List<CaseInfo>) {
@@ -49,6 +56,10 @@ class HomeFragment : Fragment() {
         adapter.addBtClickListener = object :CasesAdapter.OnClickListener{
             override fun onClick(view: ImageView, caseInfo: CaseInfo) {
                 shoppingCarAnimation(view)
+                //添加到数据库
+                GlobalScope.launch {
+                    DbManager.shoppingCartDao.insert(caseInfo)
+                }
             }
         }
     }
