@@ -46,4 +46,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     api project(":base")
     kapt "androidx.room:room-compiler:2.2.5"
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 }

@@ -58,6 +58,8 @@ class HomeFragment : Fragment() {
                 shoppingCarAnimation(view)
                 //添加到数据库
                 GlobalScope.launch {
+                    val count = DbManager.shoppingCartDao.count()
+                    caseInfo.index = count
                     DbManager.shoppingCartDao.insert(caseInfo)
                 }
             }
