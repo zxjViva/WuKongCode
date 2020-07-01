@@ -14,6 +14,7 @@ import com.zxj.wukong.databinding.FragmentShoppingcartBinding
 import com.zxj.wukong.repository.local.DbManager
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ShoppingCarFragment : Fragment() {
     lateinit var binding: FragmentShoppingcartBinding
@@ -29,7 +30,7 @@ class ShoppingCarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch {
-            val casesInfo = DbManager.shoppingCartDao.queryAll()
+            val casesInfo = DbManager.shoppingCartDao.queryAllByIndex()
             activity?.runOnUiThread {
                 val shoppingCartAdapter = ShoppingCartAdapter(casesInfo)
                 binding.rv.adapter = shoppingCartAdapter
@@ -56,14 +57,16 @@ class ShoppingCarFragment : Fragment() {
                 target: RecyclerView.ViewHolder
             ): Boolean {
                 val shoppingCartAdapter = recyclerView.adapter as ShoppingCartAdapter
-                val sourceCase = shoppingCartAdapter.casesInfo[viewHolder.bindingAdapterPosition]
-                sourceCase.index = target.bindingAdapterPosition
-                val targetCase = shoppingCartAdapter.casesInfo[target.bindingAdapterPosition]
-                targetCase.index = viewHolder.bindingAdapterPosition
+                val sourceCase = shoppingCartAdapter.casesInfo[viewHolder.absoluteAdapterPosition]
+                sourceCase.index = target.absoluteAdapterPosition
+                val targetCase = shoppingCartAdapter.casesInfo[target.absoluteAdapterPosition]
+                targetCase.index = viewHolder.absoluteAdapterPosition
+                //notifyItemMoved 并不会改变数据源,数据源还需要手动改变
+                Collections.swap(shoppingCartAdapter.casesInfo,viewHolder.absoluteAdapterPosition,target.absoluteAdapterPosition)
                 updateSql(sourceCase,targetCase)
                 recyclerView.adapter?.notifyItemMoved(
-                    viewHolder.bindingAdapterPosition,
-                    target.bindingAdapterPosition
+                    viewHolder.absoluteAdapterPosition,
+                    target.absoluteAdapterPosition
                 )
                 return true
             }

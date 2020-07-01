@@ -10,7 +10,8 @@ interface ShoppingCartDao {
 
     @Query("select * from caseInfo")
     fun queryAll(): List<CaseInfo>
-
+    @Query("select * from caseInfo order by `index`")
+    fun queryAllByIndex(): List<CaseInfo>
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(caseInfo: CaseInfo)
 
