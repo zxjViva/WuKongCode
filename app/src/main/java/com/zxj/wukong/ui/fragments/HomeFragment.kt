@@ -48,6 +48,9 @@ class HomeFragment : Fragment() {
         bindView.shopcarIv.setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_shoppingCartFragment)
         }
+        bindView.headerLayout.searchView.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
     }
 
     private fun initAdapter(result: List<CaseInfo>) {

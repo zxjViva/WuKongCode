@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.zxj.base.net.Net
 import com.zxj.base.net.NetResult
 import com.zxj.wukong.data.CaseInfo
+import com.zxj.wukong.repository.local.DbManager
 import com.zxj.wukong.repository.web.api.WuKongServerApi
 import com.zxj.wukong.repository.web.response.CasesInfoResponse
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +31,9 @@ class CasesInfoViewModel:ViewModel() {
                 call: Call<CasesInfoResponse>,
                 response: Response<CasesInfoResponse>
             ) {
+                GlobalScope.launch {
+                    DbManager.casesDao.insert(response.body()?.casesInfo?: listOf())
+                }
                 casesInfo.postValue(NetResult(response.body()?.casesInfo,null))
             }
 
